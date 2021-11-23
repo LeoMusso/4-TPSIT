@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1637689112 source:h:\es_istat\main.cpp
+	<iostream>
+	<stdio.h>
+	"classi.h"
+	"Istat.h"
+
+1637684886 h:\es_istat\classi.h
+	<iostream>
+	<string.h>
+	<stdio.h>
+
+1637688358 h:\es_istat\istat.h
+	<iostream>
+	<string.h>
+
