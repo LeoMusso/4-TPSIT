@@ -17,6 +17,7 @@ private:
 public:
      Gestione_Files(); // costruttore
      void SetNomeFile(char nomefile[255]); //SET -> assegna un valore x = 3
+     int ContaRigheFilePerAnno(int colonna, char *valore);
      void GetNomeFile(char *nome); // GET -> return x
      void SetCarSeparatore(char sep);
      char GetCarSeparatore();
@@ -123,6 +124,43 @@ int Gestione_Files::LeggiPrimaRigaGets(char *riga)
         fclose(Fp);
     }
     return err;
+}
+
+int Gestione_Files::ContaRigheFilePerAnno(int colonna, char *valore){
+    FILE *fp;
+    char str[255], copia[255];
+    int errore = -1, i = 0, numChar = 0;
+    Stringa campi[7];
+    char valorecampo[255];
+
+    fp = fopen(NomeFIle_, "r");
+
+    if(fp != NULL){
+        errore = 0;
+        fgets(str, 255, fp);
+        numChar = strlen(str);
+        while(numChar > 0){
+            split(str, campi);
+            strcpy(valorecampo, campi[colonna].carattere);
+
+            if(strcmp(valorecampo, valore) == 0){
+                //printf("\nvalore campo: %s\n", valorecampo);
+                i++;
+            }
+
+            fgets(str, 255, fp);
+            numChar = strlen(str);
+
+            if(strcmp(copia, str) == 0){
+                numChar = -1;
+            }
+            strcpy(copia, str);
+        }
+        errore = i;
+        fclose(fp);
+    }
+
+    return errore;
 }
 
 int Gestione_Files::AggiungiRiga(char riga[255])
@@ -263,3 +301,5 @@ void Gestione_Files::concatena(char str1[255], char str2[255]){
     strcat(str1, ";");
     strcat(str1, str2);
 }
+
+
